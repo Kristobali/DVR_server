@@ -1,5 +1,5 @@
 import json
-
+import time
 import psutil
 from platform import uname
 
@@ -115,6 +115,12 @@ def main():
             json.dump(dict_info, file, indent=4, ensure_ascii=False)
         print_info(dict_info)
 
+
+while True:
+    cpu_percents = psutil.cpu_percent(interval=1, percpu=True)
+    for i, percentage in enumerate(cpu_percents):
+        print(f"Использование ядра процессора {i+1}: {percentage:.2f}%")
+    time.sleep(1)
 
 if __name__ == "__main__":
     main()
